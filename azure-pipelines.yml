@@ -50,6 +50,13 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)\Package'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/Package/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'ab2dfb26-dc54-4f3e-b3c8-cce82f141406'
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
