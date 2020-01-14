@@ -30,12 +30,19 @@ steps:
   displayName: Show dotnet version
 
 - task: DotNetCoreCLI@2
-  displayName: Build all projects
+  displayName: Build package projects
   inputs:
     projects: |
      '**/*.csproj'
-     !src/test/**/*.csproj
+     !**/*Tests.csproj
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build test projects
+  inputs:
+    projects: |
+     'src/test/**/*.csproj
+    arguments: '--configuration $(BuildConfiguration)
 
 - task: DotNetCoreCLI@2
   displayName: Test
