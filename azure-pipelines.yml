@@ -30,7 +30,7 @@ steps:
   displayName: Show dotnet version
 
 - task: DotNetCoreCLI@2
-  displayName: Build package projects
+  displayName: Build all projects
   inputs:
     projects: |
      '**/*.csproj'
@@ -38,12 +38,11 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
-  displayName: Build test projects
+  displayName: Build all projects
   inputs:
-    projects: |
-     'src/test/**/*.csproj
-    arguments: '--configuration $(BuildConfiguration)
-
+    projects: 'src/test/**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+    
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
