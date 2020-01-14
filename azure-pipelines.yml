@@ -32,7 +32,9 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Build all projects
   inputs:
-    projects: '**/*.csproj'
+    projects: |
+     '**/*.csproj'
+     !src/test/**/*.csproj
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
